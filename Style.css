@@ -1,0 +1,12 @@
+body{
+    font-size: 1000%;
+    color: white;
+    background-color: black;
+}
+table{
+    border: 20px solid black;
+    border-color: white;
+    border-style: groove;
+    padding: 3%;
+    margin-top: 10%;
+}
