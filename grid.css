@@ -1,0 +1,32 @@
+.grid-container{
+    display: grid;
+    /*grid-template-columns: 200px 100px; --> 1 kolonne, 2 kolonne*/
+    /*grid-template-columns: 2fr 1fr; --> 1 kolonne, 2 kolonne*/
+    /*grid-template-columns: repeat(4,100px); --> 4 kolonner med 100px bredde */
+    /*grid-template-rows: 200px 150px; --> 1 rad, 2 rad*/
+    grid-auto-rows:150px;
+    /*mellomrom mellom boksene
+    grid-gap: 20px;
+    grid-row-gap: 40px;
+    grid-column-gap-gap: 30px;*/
+    grip-template-areas:
+            "header header"
+            "sidebar content"
+            "sidebar content"
+}
+
+.grid-item1{
+    /*grid-area: header;*/
+    grid-column-start: 1;/*grid-item starter med 1 kolonne */
+    grid-column-end: 2;/*grid-item slutter med 2 kolonner */
+}
+
+.grid-item2{
+    grid-area: sidebar;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+.grid-item3{
+    grid-area: content;
+}
