@@ -19,14 +19,17 @@
     /*grid-area: header;*/
     grid-column-start: 1;/*grid-item starter med 1 kolonne */
     grid-column-end: 2;/*grid-item slutter med 2 kolonner */
+    border: 1px solid black;
 }
 
 .grid-item2{
-    grid-area: sidebar;
+   /* grid-area: sidebar;
     grid-row-start: 2;
-    grid-row-end: 2;
+    grid-row-end: 2;*/
+    border: 1px solid black;
 }
 
 .grid-item3{
     grid-area: content;
+    border: 1px solid black;
 }
