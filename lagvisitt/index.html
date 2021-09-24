@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Katrine Huynh">
+    <title>Lag visittkort</title>
+    <style>
+        #info{
+            margin: auto;
+            line-height: 8px;
+            padding: 25px;
+            position: relative;
+            display: inline-block;
+            max-width: 25%;
+        }
+        #school{
+            line-height: 30px;
+            font-family: sans-serif, Arial;
+            font-size: 18px;
+        }
+        #name{
+            font-size: 20px;
+        }
+        img{
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+        #study, #tlf, #epost{
+            font-size: 10px;
+            line-height: 10px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>Lag visittkort</h1>
+    <form id="skjema">
+        <table>
+            <tr>
+                <td>Fornavn</td>
+                <td><label>
+                    <input type="text" id="fornavn" placeholder="fornavn" required>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Etternavn</td>
+                <td><label>
+                    <input type="text" id="etternavn" placeholder="etternavn" required>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Mobil</td>
+                <td><label>
+                    <input type="text" id="mobil" placeholder="mobilnr" required pattern="[0-9]{8}" maxlength="8">
+                </label></td>
+            </tr>
+            <tr>
+                <td>E-post</td>
+                <td><label>
+                    <input type="email" id="email" placeholder="e-post" required>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Studie</td>
+                <td><label>
+                    <input type="text" id="studie" placeholder="IT og informasjonssystemer" required>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Studiested</td>
+                <td><label>
+                    <input type="text" id="skole" placeholder="Universitetet i Agder" required>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Adresse</td>
+                <td><label>
+                    <input type="text" id="adresse" placeholder="By" required>
+                </label></td>
+            </tr>
+            <tr>
+                <td>Farge</td>
+                <td>
+                    <select id="farge" required>
+                        <option>lightblue</option>
+                        <option>lightpink</option>
+                        <option>lightyellow</option>
+                        <option>lightgreen</option>
+                        <option>lightgrey</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            <button type="submit">Send inn</button>
+            <button type="reset" value="Reset" onclick="clear()">Avbryt</button>
+        </div>
+    </form>
+</center>
+<br><br>
+    <div id="info"></div>
+
+<script>
+    //variabler
+    var skjema = document.getElementById("skjema");
+    var info = document.getElementById("info");
+    var synlig = false;
+    var elever = [];
+
+    //program
+
+    //funksjoner
+    //registrere en ny elev
+    info.innerHTML="";
+    skjema.onsubmit = function (evt){
+        evt.preventDefault();
+        var fornavn = document.getElementById("fornavn");
+        var etternavn = document.getElementById("etternavn");
+        var mobil = document.getElementById("mobil");
+        var email = document.getElementById("email");
+        var studie = document.getElementById("studie");
+        var skole = document.getElementById("skole");
+        var adresse = document.getElementById("adresse");
+        var farge = document.getElementById("farge");
+
+        elever.push({
+            fornavn: fornavn.value,
+            etternavn: etternavn.value,
+            mobil: Number(mobil.value),
+            email: email.value,
+            studie: studie.value,
+            skole: skole.value,
+            adresse: adresse.value,
+            farge: farge.value
+        });
+        visKort()
+    }
+
+        info.innerHTML = "";
+    function visKort() {
+        for(var elev of elever){
+            info.innerHTML = `
+                <div id="school" style="text-transform: uppercase">
+                ${elev.skole}
+                </div>
+                <br><br><br><br>
+                <div id="name" height: 10px;">
+                <strong>${elev.fornavn} ${elev.etternavn}</strong>
+                </div><br><br>
+                <div id="study" style="text-transform: uppercase; height: 10px;">
+                ${elev.studie}
+                </div><br>
+                <div id="tlf" style="text-transform: uppercase; height: 10px;">
+                TEL +47 ${elev.mobil}
+                </div><br>
+                <div id="epost">
+                ${elev.email}
+                </div>
+                <div id="img">
+                    <img src="bilder/images.png" alt="bilde" style="height: 30px">
+                </div>`
+            info.style.backgroundColor = `${elev.farge}`;
+            info.style.border = "1px solid black";
+        }
+
+        synlig = true;
+    }
+    function clear(){
+        skjema.value.reset();
+    }
+</script>
+</body>
+</html>
