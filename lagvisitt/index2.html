@@ -5,6 +5,23 @@
     <meta name="author" content="Katrine Huynh">
     <title>Lag visittkort</title>
     <style>
+        body{
+            /*background-image: url("bilder/blomsterbakgrunn.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;*/
+            background-color: navy;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        #skjema{
+            background-color: rgba(255,255,255,0.8);
+            width: 30%;
+            padding: 40px;
+            border-radius: 25%;
+        }
         #info{
             margin: auto;
             line-height: 8px;
@@ -12,6 +29,7 @@
             position: relative;
             display: inline-block;
             max-width: 25%;
+            text-align: left;
         }
         #school{
             line-height: 30px;
@@ -28,37 +46,37 @@
         }
         #study, #tlf, #epost{
             font-size: 10px;
-            line-height: 10px;
+            line-height: 14px;
         }
     </style>
 </head>
 <body>
 <center>
-    <h1>Lag visittkort</h1>
     <form id="skjema">
+        <h1> <a href="#">Lag visittkort</a></h1>
         <table>
             <tr>
                 <td>Fornavn</td>
                 <td><label>
-                    <input type="text" id="fornavn" placeholder="fornavn" required>
+                    <input type="text" id="fornavn" placeholder="Fornavn" required>
                 </label></td>
             </tr>
             <tr>
                 <td>Etternavn</td>
                 <td><label>
-                    <input type="text" id="etternavn" placeholder="etternavn" required>
+                    <input type="text" id="etternavn" placeholder="Etternavn" required>
                 </label></td>
             </tr>
             <tr>
                 <td>Mobil</td>
                 <td><label>
-                    <input type="text" id="mobil" placeholder="mobilnr" required pattern="[0-9]{8}" maxlength="8">
+                    <input type="text" id="mobil" placeholder="Mobilnr" required pattern="[0-9]{8}" maxlength="8">
                 </label></td>
             </tr>
             <tr>
                 <td>E-post</td>
                 <td><label>
-                    <input type="email" id="email" placeholder="e-post" required>
+                    <input type="email" id="email" placeholder="E-post" required>
                 </label></td>
             </tr>
             <tr>
@@ -74,7 +92,7 @@
                 </label></td>
             </tr>
             <tr>
-                <td>Adresse</td>
+                <td>Bosted</td>
                 <td><label>
                     <input type="text" id="adresse" placeholder="By" required>
                 </label></td>
@@ -82,25 +100,27 @@
             <tr>
                 <td>Farge</td>
                 <td>
-                    <select id="farge" required>
-                        <option>lightblue</option>
-                        <option>lightpink</option>
-                        <option>lightyellow</option>
-                        <option>lightgreen</option>
-                        <option>lightgrey</option>
-                    </select>
+                    <label>
+                        <select id="farge" required>
+                            <option>lightblue</option>
+                            <option>lightpink</option>
+                            <option>yellow</option>
+                            <option>lightgreen</option>
+                            <option>lightgrey</option>
+                        </select>
+                    </label>
                 </td>
             </tr>
         </table>
         <br>
         <div>
             <button type="submit">Send inn</button>
-            <button type="reset" value="Reset" onclick="clear()">Avbryt</button>
+            <button type="reset" value="Reset">Avbryt</button>
         </div>
     </form>
 </center>
 <br><br>
-    <div id="info"></div>
+<center><div id="info"></div></center>
 
 <script>
     //variabler
@@ -146,29 +166,34 @@
                 ${elev.skole}
                 </div>
                 <br><br><br><br>
-                <div id="name" height: 10px;">
-                <strong>${elev.fornavn} ${elev.etternavn}</strong>
+                <div id="name" style="height: 10px" ">
+                <strong>${elev.fornavn.charAt(0).toUpperCase()+elev.fornavn.slice(1)}
+                    ${elev.etternavn.charAt(0).toUpperCase()+elev.etternavn.slice(1)}</strong>
                 </div><br><br>
-                <div id="study" style="text-transform: uppercase; height: 10px;">
+                <div id="study" style="text-transform: uppercase;">
                 ${elev.studie}
                 </div><br>
                 <div id="tlf" style="text-transform: uppercase; height: 10px;">
-                TEL +47 ${elev.mobil}
+                TEL +47 ${elev.mobil} &nbsp &nbsp ${elev.adresse}
                 </div><br>
                 <div id="epost">
                 ${elev.email}
                 </div>
-                <div id="img">
+                <!--<div id="img">
                     <img src="bilder/images.png" alt="bilde" style="height: 30px">
-                </div>`
+                </div>-->`
             info.style.backgroundColor = `${elev.farge}`;
             info.style.border = "1px solid black";
+            info.style.boxShadow = "4px 6px black"
         }
 
         synlig = true;
     }
-    function clear(){
-        skjema.value.reset();
+    skjema.onreset = function (){
+        info.innerHTML = "";
+        info.style.backgroundColor = "";
+        info.style.border = "";
+        info.style.boxShadow = "";
     }
 </script>
 </body>
